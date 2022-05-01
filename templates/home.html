@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+{% extends 'bse.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>E Lib | Home</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <div style=" text-align: center;"> <strong>Recommended Books</strong></div>
+    <div class="row">
+        {% for book in recommended_books %}
+        <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2">
+            <a href="{% url 'book_detail' book.slug %}">
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <img src="{{book.cover_image.url}}">
+
+                    </div>
+                </div>
+            </a>
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container">
+<div style=" text-align: center;"> <strong>Fiction Books</strong></div>
+    <div class="row">
+        {% for book in fiction_books %}
+        <div class="col-6 col-sm4 col-md-4 col-lg-3 col-xl-2">
+            <a href="{% url 'book_detail' book.slug %}">
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <img src="{{book.cover_image.url}}">
+
+                    </div>
+                </div>
+            </a>
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="container">
+   <div style=" text-align: center;"> <strong>Business Books</strong></div>
+    <div class="row">
+        {% for book in business_books %}
+        <div class="col-6 col-sm4 col-md-4 col-lg-3 col-xl-2">
+            <a href="{% url 'book_detail' book.slug %}">
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <img src="{{book.cover_image.url}}">
+
+                    </div>
+                </div>
+            </a>
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+</body>
+</html>

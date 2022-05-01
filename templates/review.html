@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'rate' book.slug %}" method="post">{% csrf_token %}
+<input type="text" name="text">text
+    <input type="number" name="rating">rating
+    <button type="submit">submit</button>
+</form>
+
+</body>
+</html>
