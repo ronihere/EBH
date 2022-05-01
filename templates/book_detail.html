@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E lib | {{book}}</title>
     <style>
@@ -161,22 +162,24 @@
     <div class="card-container">
         <div class="card u-clearfix">
           <div class="card-body">
-            <span class="card-number card-circle subtle">01</span>
+            <span class="card-number card-circle subtle">{{avg}}/5</span><br><br>
 
-
+{% with ''|center:avg as range %}
+{% for _ in range %}
             <span class="fa fa-star checked" id="first"></span>
-            <span class="fa fa-star checked" id="second"></span>
-            <span class="fa fa-star checked" id="third"></span>
+              {% endfor %}
+{% endwith %}
+{% with ''|center:remaining as range %}
+{% for _ in range %}
             <span class="fa fa-star" id="fourth"></span>
-            <span class="fa fa-star" id="fifth"></span>
-
-
+              {% endfor %}
+{% endwith %}
 
             <span class="card-author subtle">{{book.author}}</span>
             <h2 class="card-title">{{book.title}}</h2>
             <span class="card-description subtle">{{book.summary}}</span>
-            <div class="card-read"><a href="{% url 'rate' book.slug %}">RATE</a></div>
-              <button id="download"; style="border: 5px solid black; text-decoration:none;"><a href="{{book.pdf.url}}" download="{{book.pdf.url}}"> Download PDF</a></button>
+            <div class="card-read"><a href="{% url 'rate' book.slug %}" style='text-decoration: none;'>RATE It</a></div>
+              <button id="download"; style="border: 5px solid black;"><a href="{{book.pdf.url}}" style='text-decoration: none;' download="{{book.pdf.url}}"> Download PDF</a></button>
             <span class="card-tag card-circle subtle">C</span>
           </div>
           <img src="{{book.cover_image.url}}" alt="282*361" class="card-media" />

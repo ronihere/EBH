@@ -44,38 +44,51 @@ def category_detail(request,slug):
 @login_required(login_url='login')
 def book_detail(request,slug):
 
+
+
+
+
+
+
+
     book = Book.objects.get(slug=slug)
+    book_rating = Review.objects.filter(title = book)
+    print(book_rating)
+    sum=0
+    counter=0
+    for book_rate in book_rating:
+        counter+=1
+        sum+=book_rate.rating
+    if counter==0:
+        sum=0
+    else:
+        sum=sum//counter
+        counter=(5-sum)
+
     book_category=book.category.first()
     similar_books = Book.objects.filter(category__name__startswith = book_category)
-    return render(request,'book_detail.html',{'book':book,'similar_books':similar_books})
+    return render(request,'book_detail.html',{'book':book,'similar_books':similar_books,'avg':sum,'remaining':counter})
 
 @login_required(login_url='login')
 def Rate(request,slug):
     book = Book.objects.get(slug=slug)
+    title = book.title
     user = request.user
     if request.method == 'POST':
         text = request.POST['text']
         rating = request.POST['rating']
-        var = Review(text=text,rating=rating,user=user,bookm=book)
-        var.save()
+        rating=int(rating)
+
+        if (Review.objects.filter(user=user)) & (Review.objects.filter(title=title)):
+            var = Review.objects.get(title=title,user=user)
+            var.rating = rating
+            var.text=text
+            var.save()
+        else:
+            var = Review(text=text, rating=rating, user=user, bookm=book, title=title)
+            var.save()
         return redirect('/')
-    # print('1')
-    # book=Book.objects.get(slug=slug)
-    #
-    # user = request.user
-    #
-    # if request.method=="POST":
-    #     print('10')
-    #     form = RateForm(request.POST)
-    #     if form.is_valid():
-    #         print('100')
-    #         rate = form.save(commit=False)
-    #         rate.user=user
-    #         rate.book=book
-    #         print('1000')
-    #         rate.save()
-    #         print('10000')
-    #         return redirect('/')
+
     else:
         return render(request,'review.html',{"book":book})
 

@@ -20,6 +20,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 RATE_CHOICES= [
+    (0,'0 = Not Watchable'),
     (1,'1 = Trash'),
     (2,'2 = Bad'),
     (3,'3 = Good'),
@@ -29,9 +30,10 @@ RATE_CHOICES= [
 
 class Review(models.Model):
     bookm=models.ForeignKey(Book,on_delete=models.CASCADE)
+    title = models.CharField(default='',max_length=100)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     text = models.TextField(max_length=400)
     rating = models.SmallIntegerField(choices=RATE_CHOICES)
 
     def __str__(self):
-        return self.bookm.title
+        return f"{self.bookm.title} + {self.user}"

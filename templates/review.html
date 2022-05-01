@@ -7,7 +7,8 @@
 <body>
 <form action="{% url 'rate' book.slug %}" method="post">{% csrf_token %}
 <input type="text" name="text">text
-    <input type="number" name="rating">rating
+<!--    <input type="number" name="rating">rating-->
+    <input type="range" id="points" name="rating" min="0" max="5">
     <button type="submit">submit</button>
 </form>
 
