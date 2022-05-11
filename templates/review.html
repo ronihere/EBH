@@ -1,16 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("{% static 'img/review.png' %}");
+
+  min-height: 680px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+
+header h3 {
+  font-size: 50px;
+  font-weight: 600;
+background-image: conic-gradient(#553c9a, #ee4b2b, #00c2cb);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+</style>
 </head>
+
+<header><h3 style="text-align:center;">{{book.title}}</h3></header>
+
+
 <body>
-<form action="{% url 'rate' book.slug %}" method="post">{% csrf_token %}
-<input type="text" name="text">text
-<!--    <input type="number" name="rating">rating-->
-    <input type="range" id="points" name="rating" min="0" max="5">
-    <button type="submit">submit</button>
-</form>
+
+<div class="bg-img">
+  <form action="{% url 'rate' book.slug %}" method="post" class="container">{% csrf_token %}
+    <h2 style="text-align:center;">{{book.title}}</h2>
+
+    <label ><b>Review: </b></label>
+    <input type="text" placeholder="Enter Review" name="text" required>
+
+    <label <b>Rate: <br></b></label>
+    <input type="range" placeholder="Rate?" name="rating" min="0" max="5" required><br>
+
+
+   <br> <button type="submit" class="btn">Submit</button>
+  </form>
+</div>
+
 
 </body>
 </html>
