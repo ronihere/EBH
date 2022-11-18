@@ -1,4 +1,4 @@
-# EBH
+# EBH ~A digital book hub
 - A online book reading platform that allows  registered authenticated users to read books by categorizing them in different genres. 
 * Each book can be **viewed searched, rated, commented on, and downloaded**. New Books can be only added by the admin.
 + It is made with **Django-SQLite** and **Bootstrap** components.
